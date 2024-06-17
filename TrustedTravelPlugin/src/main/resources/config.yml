@@ -1,0 +1,5 @@
+servers:
+  #add as many servers as needed
+  creative:
+    address: localhost
+    port: 25565

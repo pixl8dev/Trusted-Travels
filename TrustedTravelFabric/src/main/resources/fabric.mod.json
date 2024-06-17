@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "trustedtravelfabric",
+  "version": "${version}",
+  "name": "TrustedTravelFabric",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/lukas/TrustedTravelFabric"
+  },
+  "license": "MIT",
+  "icon": "assets/trustedtravelfabric/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "server": [
+      "me.lukasabbe.trustedtravelfabric.TrustedTravelFabric"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

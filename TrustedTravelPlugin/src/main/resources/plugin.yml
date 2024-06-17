@@ -1,0 +1,8 @@
+name: TrustedTravelPlugin
+version: '${project.version}'
+main: me.lukasabbe.trustedtravelplugin.TrustedTravelPlugin
+api-version: '1.21'
+commands:
+  server:
+    description: transfers you to chosen server
+    usage: /<command> [args]
