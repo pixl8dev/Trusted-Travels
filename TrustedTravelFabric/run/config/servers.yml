@@ -1,8 +1,0 @@
-servers:
-  #add as many servers as needed
-  creative:
-    address: creative.sgc.se
-    port: 25566
-  hypixel:
-    address: mc.hypixel.net
-    port: 25565
