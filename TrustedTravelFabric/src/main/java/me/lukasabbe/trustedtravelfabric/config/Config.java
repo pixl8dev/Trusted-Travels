@@ -17,7 +17,15 @@ public class Config {
 
     public List<ServerObj> servers = new ArrayList<>();
 
-    public Config() throws FileNotFoundException {
+    public Config(){
+        try {
+            createAndLoadConfig();
+        }catch (FileNotFoundException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void createAndLoadConfig() throws FileNotFoundException {
         Path configPath = FabricLoader.getInstance().getConfigDir().resolve("servers.yml");
         if(!Files.exists(configPath)) createConfigFile(configPath);
 
@@ -31,7 +39,6 @@ public class Config {
                     (int) server.getValue().get("port")
             ));
         }
-
     }
 
     public void createConfigFile(Path configPath){
@@ -43,5 +50,13 @@ public class Config {
                 throw new RuntimeException(e);
             }
         });
+    }
+    public void reloadConfig(){
+        servers.clear();
+        try{
+            createAndLoadConfig();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
