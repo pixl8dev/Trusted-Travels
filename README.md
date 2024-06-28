@@ -18,4 +18,5 @@ servers:
 
 ```
 /server <name> - The name is the one you put in the config
+/tt reload - Reload to current config
 ```
