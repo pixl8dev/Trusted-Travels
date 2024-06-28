@@ -1,5 +1,7 @@
-package me.lukasabbe.trustedtravelplugin;
+package me.lukasabbe.trustedtravelplugin.commands;
 
+import me.lukasabbe.trustedtravelplugin.ServerObj;
+import me.lukasabbe.trustedtravelplugin.TrustedTravelPlugin;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

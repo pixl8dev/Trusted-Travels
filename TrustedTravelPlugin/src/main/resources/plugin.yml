@@ -6,3 +6,7 @@ commands:
   server:
     description: transfers you to chosen server
     usage: /<command> [args]
+  tt:
+    description: Reload config
+    usage: /<command> reload
+    permission: tt.reload
