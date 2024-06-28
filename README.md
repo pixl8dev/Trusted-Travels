@@ -1,3 +1,5 @@
+#[Download](https://modrinth.com/plugin/trusted-travels)
+
 # What is it?
 This is a mod/plugin made for jumping between your servers. It's orginally made for a survival/creative combo. Use this if you don't want to set up a proxy server.
 
