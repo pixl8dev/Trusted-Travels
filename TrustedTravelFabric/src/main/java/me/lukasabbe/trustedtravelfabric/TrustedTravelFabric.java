@@ -1,6 +1,8 @@
 package me.lukasabbe.trustedtravelfabric;
 
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.context.CommandContext;
 import me.lukasabbe.trustedtravelfabric.config.Config;
 import me.lukasabbe.trustedtravelfabric.config.ServerObj;
 import net.fabricmc.api.DedicatedServerModInitializer;
@@ -11,11 +13,11 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
-import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 public class TrustedTravelFabric implements DedicatedServerModInitializer {
-    Config serverConfig;
+    public static Config serverConfig;
     @Override
     public void onInitializeServer() {
         serverConfig = new Config();
@@ -29,20 +31,35 @@ public class TrustedTravelFabric implements DedicatedServerModInitializer {
 
     public LiteralArgumentBuilder<ServerCommandSource> createServerCommands(List<ServerObj> servers){
         LiteralArgumentBuilder<ServerCommandSource> manager = CommandManager.literal("server");
-        servers.forEach(server -> manager.then(CommandManager.literal(server.name).executes(context -> {
-            ServerTransferS2CPacket transferPacket = new ServerTransferS2CPacket(server.address, server.port);
-            if(!context.getSource().isExecutedByPlayer()) return 0;
-            ServerPlayerEntity player = context.getSource().getPlayer();
-            player.networkHandler.sendPacket(transferPacket);
-            return 1;
-        })));
-
+        manager.then(
+                CommandManager
+                        .argument("servers", StringArgumentType.word())
+                        .suggests(new ServerSuggestionProvider())
+                        .executes(ctx -> serverCmd(servers, ctx)));
         return manager;
+    }
+
+    private int serverCmd(List<ServerObj> servers, CommandContext<ServerCommandSource> ctx) {
+        String server = StringArgumentType.getString(ctx,"servers");
+        Optional<ServerObj> OptionalServerObj = servers.stream().filter(args -> args.name.equals(server)).findFirst();
+        if(OptionalServerObj.isEmpty()){
+            ctx.getSource().sendError(Text.literal("There is no server with that name"));
+            return 0;
+        }
+        ServerObj serverObj = OptionalServerObj.get();
+        ServerTransferS2CPacket transferPacket = new ServerTransferS2CPacket(serverObj.address, serverObj.port);
+        if(!ctx.getSource().isExecutedByPlayer()) {
+            ctx.getSource().sendError(Text.literal("Only players can execute this command"));
+            return 0;
+        }
+        ServerPlayerEntity player = ctx.getSource().getPlayer();
+        player.networkHandler.sendPacket(transferPacket);
+        return 1;
     }
 
     public LiteralArgumentBuilder<ServerCommandSource> createReloadCommand(){
         return CommandManager
-                .literal("ttf")
+                .literal("tt")
                 .requires(serverCommandSource -> serverCommandSource.hasPermissionLevel(1))
                 .then(
                         CommandManager
