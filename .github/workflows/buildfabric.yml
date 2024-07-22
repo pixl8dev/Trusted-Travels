@@ -1,8 +1,9 @@
-name: build
+name: Build mod
 on: [pull_request, push]
 
 jobs:
   build:
+    name: Build mod
     strategy:
       matrix:
         # Use these Java versions

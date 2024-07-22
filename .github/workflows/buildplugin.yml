@@ -1,12 +1,17 @@
-name: Build DEV Jars
+name: Build plugin
 
 on: [push, pull_request]
 
 jobs:
-  build_dev_jars:
-    name: Build DEV jars
+  build:
+    name: Build plugin
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        # Use these Java versions
+        java: [
+          21,    # Current Java LTS
+        ]
     steps:
       - uses: actions/checkout@v2
         with:
