@@ -61,14 +61,13 @@ public class TrustedTravelFabric implements DedicatedServerModInitializer {
         return CommandManager
                 .literal("tt")
                 .requires(serverCommandSource -> serverCommandSource.hasPermissionLevel(1))
-                .then(
-                        CommandManager
-                                .literal("reload")
-                                .executes(context -> {
-                                    serverConfig.reloadConfig();
-                                    context.getSource().sendFeedback(()-> Text.literal("Reloaded config"),false);
-                                    return 1;
-                                }));
+                .then(CommandManager
+                        .literal("reload")
+                        .executes(context -> {
+                            serverConfig.reloadConfig();
+                            context.getSource().sendFeedback(()-> Text.literal("Reloaded config"),false);
+                            return 1;
+                        }));
     }
 
 }
