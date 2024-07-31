@@ -1,10 +1,11 @@
-package me.lukasabbe.trustedtravelfabric;
+package me.lukasabbe.trustedtravelfabric.commands;
 
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
+import me.lukasabbe.trustedtravelfabric.TrustedTravelFabric;
 import me.lukasabbe.trustedtravelfabric.config.ServerObj;
 import net.minecraft.server.command.ServerCommandSource;
 
