@@ -35,3 +35,16 @@ jobs:
         with:
           name: Artifacts
           path: TrustedTravelFabric/build/libs/
+      - name: Read values from Prop. file
+        id: read_property
+        uses: christian-draeger/read-properties@1.1.1
+        with:
+          path: "./TrustedTravelFabric/gradle.properties"
+          properties: "mod_version minecraft_version archives_base_name"
+
+      - name: Upload artifacts to discord
+        uses: tsickert/discord-webhook@v6.0.0
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_URL }}
+          content: "Git hub action build. **THIS MAY NOT BE A FUNCTIONAL BUILD**\nMod: ${{steps.read_property.outputs.archives_base_name}}\nMCVersion: ${{steps.read_property.outputs.minecraft_version}}\nMod version: ${{steps.read_property.outputs.mod_version}}"
+          filename: TrustedTravelFabric/build/libs/${{ steps.read_property.outputs.archives_base_name }}-${{steps.read_property.outputs.mod_version}}.jar
