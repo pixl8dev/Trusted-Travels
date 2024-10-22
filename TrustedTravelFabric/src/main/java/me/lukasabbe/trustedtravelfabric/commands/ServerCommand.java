@@ -22,7 +22,7 @@ public class ServerCommand implements Command {
                 .then(CommandManager
                         .argument("servers", StringArgumentType.word())
                         .suggests(new ServerSuggestionProvider())
-                        .executes(ctx -> runCommand(ctx)));
+                        .executes(this::runCommand));
     }
 
     @Override
