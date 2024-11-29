@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "id": "trustedtravelfabric",
   "version": "${version}",
-  "name": "TrustedTravelFabric",
-  "description": "",
-  "authors": [],
+  "name": "Trusted Travel Fabric",
+  "description": "Server mod/plugin where you can easily travel to other servers. It uses Mojangs new transfer packet.",
+  "authors": ["lukasabbe"],
   "contact": {
-    "repo": "https://github.com/lukas/TrustedTravelFabric"
+    "repo": "https://github.com/lukasabbe/Trusted-Travels"
   },
   "license": "MIT",
   "icon": "assets/trustedtravelfabric/icon.png",
