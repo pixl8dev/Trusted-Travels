@@ -18,7 +18,7 @@ public class ServerTransferCommand implements CommandExecutor {
         Player player = (Player) commandSender;
         for(ServerObj server : servers){
             if(server.name.equals(args[0])){
-                player.transfer(server.address, server.port);
+                server.transferPlayer(player);
                 return true;
             }
         }
